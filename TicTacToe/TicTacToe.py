@@ -1,6 +1,6 @@
 import sys
 
-import random
+import randint from random
 
 theBoard = {7: ' ' , 8: ' ' , 9: ' ' ,
             4: ' ' , 5: ' ' , 6: ' ' ,
@@ -88,14 +88,13 @@ def executeTurn():
 
 def CheckGame(x,y,z):
     if theBoard[z] == 'X':
-        if theBoard[x] == theBoard[y] == 'X':
+        if theBoard[x] == theBoard[y] == theBoard[z]:
                 print('Game Over! X Won!')
                 sys.exit()
     elif theBoard[z] == '0':
-        if theBoard[x] == theBoard[y] == '0':
+        if theBoard[x] == theBoard[y] == theBoard[z]:
                 print('Game Over! 0 Won!')
                 sys.exit()
-    return            
 
 
 
