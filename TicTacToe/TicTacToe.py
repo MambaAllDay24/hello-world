@@ -1,6 +1,6 @@
 import sys
 
-import randint() from random
+import randint from random
 
 theBoard = {7: ' ' , 8: ' ' , 9: ' ' ,
             4: ' ' , 5: ' ' , 6: ' ' ,
@@ -132,4 +132,5 @@ def FullGame():
 
                 
 FullGame()
+
 sys.exit()
