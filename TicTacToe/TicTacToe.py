@@ -1,4 +1,3 @@
-global turn, textmove, move 
 import sys
 
 import random
@@ -48,12 +47,13 @@ def checkWin(x,y,z):
             if theBoard[x] == theBoard[y] == theBoard[z]:
                 print('Game Over')
                 print("X won")
-                return
+                sys.exit()
+                
         elif theBoard[z] == '0':
             if theBoard[x] == theBoard[y] == theBoard[z]:
                 print('Game Over')
                 print("0 won")
-                return
+                sys.exit()
             
                 
 
@@ -75,14 +75,7 @@ def syntaxError():
     move= int(textmove)
     theBoard[move]=turn
     turn = 'X'
-    return
-def noFunnyBusiness():
-    if move > 9:
-        syntaxError()
-    elif move < 1:
-        syntaxError()
-    elif move = '':
-        syntaxError()
+    
 
         
         
@@ -95,25 +88,23 @@ def fullCheckWin():
     checkWin(9,6,3)
     checkWin(9,5,1)
     checkWin(7,5,3)
-    return
+    
 
         
 def executeTurn():    
     placeOnGrid('0')
     placeOnGrid('X')
-    return
+    
 
 
 def CheckGame(x,y,z):
-    if theBoard[x] == theBoard[y] == theBoard[z] != '':
+    if theBoard[x] == theBoard[y] == theBoard[z]:
                 if theBoard[z] == 'X':
                     print('Game Over! X Won!')
-                    sys.exit()
-                    return
+                    
                 elif theBoard[z] == '0':
                     print('Game Over! 0 Won!')
-                    sys.exit
-                    return
+                    
                 
                         
 def everythingCheck():
@@ -125,7 +116,7 @@ def everythingCheck():
     CheckGame(3,6,9)
     CheckGame(7,5,3)
     CheckGame(9,5,1)
-    return
+    
 
 
 def game():
@@ -136,15 +127,14 @@ def game():
              placeOnGrid('0')
         while True:
             everythingCheck()
-    while True:
-        noFunnyBusiness()
-    return
+    
+    
 
                     
 def FullGame():
     key()
     game()
-    return
+    
 
 
 FullGame()
