@@ -66,25 +66,26 @@ def placeOnGrid(currentPlayerPiece):
     theBoard[move]=turn
     turn = 'X'
 
-def syntaxError():
-    print('Sorry that is not a square on the board. Please try again')
-    turn= currentPlayerPiece
-    print("It's your turn, " + turn + " Move to which place?")
-    printBoard(theBoard)
-    textmove= input()
-    move= int(textmove)
-    theBoard[move]=turn
-    turn = 'X'
-    return
+
 def noFunnyBusiness():
     if move > 9:
-        syntaxError()
-    elif move < 1:
-        syntaxError()
-    elif move = '':
-        syntaxError()
-
-        
+        print('Sorry that is not a square on the board. Please try again')
+        turn= currentPlayerPiece
+        print("It's your turn, " + turn + " Move to which place?")
+        printBoard(theBoard)
+        textmove= input()
+        move= int(textmove)
+        theBoard[move]=turn
+        turn = 'X'
+        print('Sorry that is not a square on the board. Please try again')
+    if move < 1 or == '':
+        turn= currentPlayerPiece
+        print("It's your turn, " + turn + " Move to which place?")
+        printBoard(theBoard)
+        textmove= input()
+        move= int(textmove)
+        theBoard[move]=turn
+        turn = 'X'
         
 def fullCheckWin():
     checkWin(7,8,9)
@@ -95,27 +96,27 @@ def fullCheckWin():
     checkWin(9,6,3)
     checkWin(9,5,1)
     checkWin(7,5,3)
-    return
+
 
         
 def executeTurn():    
     placeOnGrid('0')
     placeOnGrid('X')
-    return
-
 
 def CheckGame(x,y,z):
     if theBoard[x] == theBoard[y] == theBoard[z] != '':
                 if theBoard[z] == 'X':
                     print('Game Over! X Won!')
-                    sys.exit()
-                    return
                 elif theBoard[z] == '0':
                     print('Game Over! 0 Won!')
-                    sys.exit
-                    return
-                
-                        
+                 if theBoard[z] == 'X':
+                    if theBoard[x] == theBoard[y] == theBoard[z]:
+                        print('Game Over! X Won!')
+                            sys.exit()
+                elif theBoard[z] == '0':
+                    if theBoard[x] == theBoard[y] == theBoard[z]:
+                        print('Game Over! 0 Won!')
+                        sys.exit()
 def everythingCheck():
     CheckGame(1,2,3)
     CheckGame(4,5,6)
@@ -125,9 +126,7 @@ def everythingCheck():
     CheckGame(3,6,9)
     CheckGame(7,5,3)
     CheckGame(9,5,1)
-    return
-
-
+    
 def game():
     
     for x in range(0,8):
@@ -138,15 +137,13 @@ def game():
             everythingCheck()
     while True:
         noFunnyBusiness()
-    return
+
 
                     
 def FullGame():
     key()
     game()
-    return
-
-
+       
 FullGame()
 sys.exit()
 
