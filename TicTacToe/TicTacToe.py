@@ -1,3 +1,4 @@
+global turn, textmove, move 
 import sys
 
 import random
@@ -76,8 +77,8 @@ def noFunnyBusiness():
         move= int(textmove)
         theBoard[move]=turn
         turn = 'X'
-    if move < 1 or = '':
         print('Sorry that is not a square on the board. Please try again')
+    if move < 1 or == '':
         turn= currentPlayerPiece
         print("It's your turn, " + turn + " Move to which place?")
         printBoard(theBoard)
@@ -132,7 +133,7 @@ def game():
         executeTurn()
         if x == 9:
              placeOnGrid('0')
-        while x >= 5:
+        while True:
             everythingCheck()
     while True:
         noFunnyBusiness()
