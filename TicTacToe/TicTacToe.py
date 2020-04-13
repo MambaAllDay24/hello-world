@@ -108,6 +108,14 @@ def CheckGame(x,y,z):
                     print('Game Over! X Won!')
                 elif theBoard[z] == '0':
                     print('Game Over! 0 Won!')
+                 if theBoard[z] == 'X':
+                    if theBoard[x] == theBoard[y] == theBoard[z]:
+                        print('Game Over! X Won!')
+                            sys.exit()
+                elif theBoard[z] == '0':
+                    if theBoard[x] == theBoard[y] == theBoard[z]:
+                        print('Game Over! 0 Won!')
+                        sys.exit()
 def everythingCheck():
     CheckGame(1,2,3)
     CheckGame(4,5,6)
