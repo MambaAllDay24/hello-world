@@ -76,8 +76,8 @@ def noFunnyBusiness():
         move= int(textmove)
         theBoard[move]=turn
         turn = 'X'
-    if move < 1 or == '':
-        print('Sorry that is not a square on the board. Please try again/')
+    if move < 1 or = '':
+        print('Sorry that is not a square on the board. Please try again')
         turn= currentPlayerPiece
         print("It's your turn, " + turn + " Move to which place?")
         printBoard(theBoard)
