@@ -1,16 +1,16 @@
-global textmove,move, turn
-import sys
+global textmove, move, debug
 
-import random
+import sys
 
 theBoard = {7: ' ' , 8: ' ' , 9: ' ' ,
             4: ' ' , 5: ' ' , 6: ' ' ,
             1: ' ' , 2: ' ' , 3: ' ' }
 
+debug = True
 
 player1Name = "Player 1"
 
-player1Piece = "O"
+player1Piece = "0"
 
 player2Name = "Player 2"
 
@@ -44,74 +44,57 @@ def key():
 
 
 def checkWin(x,y,z):
-        if theBoard[z] == 'X':
+    #if debug: print("checkWin")
+    if theBoard[z] == player2Piece:
+        if theBoard[x] == theBoard[y] == theBoard[z]:
+            print('Game Over')
+            print(player2Piece + " won")
+            currentPlayerPiece
+            sys.exit()
+                
+        elif theBoard[z] == player1Piece:
             if theBoard[x] == theBoard[y] == theBoard[z]:
                 print('Game Over')
-                print("X won")
-                return
-        elif theBoard[z] == '0':
-            if theBoard[x] == theBoard[y] == theBoard[z]:
-                print('Game Over')
-                print("0 won")
-                return
+                print(player1Piece + " won")
+                currentPlayerPiece
+                sys.exit()
             
                 
-global textmove,move, turn
-
-
 def placeOnGrid(currentPlayerPiece):
-    turn= currentPlayerPiece
-    print("It's your turn, " + turn + " Move to which place?")
+    #if debug: print("placeOnGrid")
+    print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
     printBoard(theBoard)
     textmove= input()
     move= int(textmove)
-    theBoard[move]=turn
-    turn = 'X'
-    return
-global textmove, move, turn
-
+    theBoard[move]=currentPlayerPiece
+    currentPlayerPiece = 'X'
 
 def noFunnyBusiness():
-    global textmove, move, turn
-    print('Sorry that is not a square on the board. Please try again')
-    turn= currentPlayerPiece
-    print("It's your turn, " + turn + " Move to which place?")
-    printBoard(theBoard)
-    textmove= input()
-    move= int(textmove)
-    theBoard[move]=turn
-    turn = 'X'
-    if move > 10:
+    isAValidMove = true
+    
+    if move > '9':
         print('Sorry that is not a square on the board. Please try again')
-        turn= currentPlayerPiece
-        print("It's your turn, " + turn + " Move to which place?")
+        print("It's your turn," + currentPlayerPiece + " Move to which place?")
         printBoard(theBoard)
         textmove= input()
         move= int(textmove)
-        theBoard[move]=turn
-        turn = 'X'
-        return
-    elif move < 1:
+        theBoard[move]=currentPlayerPiece
+    if move < '1':
         print('Sorry that is not a square on the board. Please try again')
-        turn= currentPlayerPiece
-        print("It's your turn, " + turn + " Move to which place?")
+        print("It's your turn," + currentPlayerPiece + " Move to which place?")
         printBoard(theBoard)
         textmove= input()
         move= int(textmove)
-        theBoard[move]=turn
-        turn = 'X'
-        return
-    elif move == '':
+        theBoard[move]=currentPlayerPiece
+    if move == '':
         print('Sorry that is not a square on the board. Please try again')
-        turn= currentPlayerPiece
-        print("It's your turn, " + turn + " Move to which place?")
+        currentPlayerPiece= currentPlayerPiece
+        print("It's your turn," + currentPlayerPiece + " Move to which place?")
         printBoard(theBoard)
         textmove= input()
         move= int(textmove)
-        theBoard[move]=turn
-        turn = 'X'
-        return
-        
+        theBoard[move]=currentPlayerPiece
+        currentPlayerPiece = player2Piece
 def fullCheckWin():
     checkWin(7,8,9)
     checkWin(4,5,6)
@@ -121,21 +104,34 @@ def fullCheckWin():
     checkWin(9,6,3)
     checkWin(9,5,1)
     checkWin(7,5,3)
-    return
+
+def syntaxError():
+    print('Sorry that is not a square on the board. Please try again')
+    currentPlayerPiece= currentPlayerPiece
+    print("It's your turn," + currentPlayerPiece + " Move to which place?")
+    printBoard(theBoard)
+    textmove= input()
+    move= int(textmove)
+    theBoard[move]=currentPlayerPiece
 
         
-def executeTurn():    
-    placeOnGrid('0')
-    placeOnGrid('X')
-    return
+def executeTurn(currentTurn):    
+    placeOnGrid(currentTurn)
+    everythingCheck()
+    
+
+
 def CheckGame(x,y,z):
-    if theBoard[x] == theBoard[y] == theBoard[z] != '':
-        if theBoard[z] == 'X':
-            print('Game Over! X Won!')
-            sys.exit()
-        elif theBoard[z] == '0':
-            print('Game Over! 0 Won!')
-            sys.exit()
+    if theBoard[x] == player2Piece:
+        if theBoard[y] == player2Piece:
+            if theBoard[z] == player2Piece:
+                print('Game Over!' + player2Piece +  'won!')
+                sys.exit()
+    if theBoard[x] == player1Piece:
+        if theBoard[y] == player1Piece:
+            if theBoard[z] == player1Piece:
+                print('Game Over!' + player1Piece +  'won!')
+                sys.exit()                   
 def everythingCheck():
     CheckGame(1,2,3)
     CheckGame(4,5,6)
@@ -146,23 +142,42 @@ def everythingCheck():
     CheckGame(7,5,3)
     CheckGame(9,5,1)
     
+
+def allTurns():
+    executeTurn('0')
+    executeTurn('X')
+    executeTurn('0')
+    executeTurn('X')
+    executeTurn('0')
+    executeTurn('X')
+    executeTurn('0')
+    executeTurn('X')
+    executeTurn('0')
+
+    
 def game():
     
-    for x in range(0,5):
-        executeTurn()
-        if x == 5:
-             placeOnGrid('0')
-        while x >= 5:
-            everythingCheck()
+    allTurns()
+    while True:
+        everythingCheck()
     while True:
         noFunnyBusiness()
-    sys.exit()
+
+#Ask Player1 where they want to move, Check for a valid move, Put the move into the board
+#Check for win
+#Switch Players
+#Repeat    
+
+#isValid = CheckMove(currentMove)
+#if isValid:
 
                     
 def FullGame():
     key()
     game()
        
+    
+
+
 FullGame()
 sys.exit()
-
