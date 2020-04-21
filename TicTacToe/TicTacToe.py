@@ -70,31 +70,14 @@ def placeOnGrid(currentPlayerPiece):
     currentPlayerPiece = 'X'
 
 def noFunnyBusiness():
-    isAValidMove = true
+    isAValidMove = True
     
     if move > '9':
-        print('Sorry that is not a square on the board. Please try again')
-        print("It's your turn," + currentPlayerPiece + " Move to which place?")
-        printBoard(theBoard)
-        textmove= input()
-        move= int(textmove)
-        theBoard[move]=currentPlayerPiece
+        syntaxError()
     if move < '1':
-        print('Sorry that is not a square on the board. Please try again')
-        print("It's your turn," + currentPlayerPiece + " Move to which place?")
-        printBoard(theBoard)
-        textmove= input()
-        move= int(textmove)
-        theBoard[move]=currentPlayerPiece
+        syntaxError()
     if move == '':
-        print('Sorry that is not a square on the board. Please try again')
-        currentPlayerPiece= currentPlayerPiece
-        print("It's your turn," + currentPlayerPiece + " Move to which place?")
-        printBoard(theBoard)
-        textmove= input()
-        move= int(textmove)
-        theBoard[move]=currentPlayerPiece
-        currentPlayerPiece = player2Piece
+        syntaxError()
 def fullCheckWin():
     checkWin(7,8,9)
     checkWin(4,5,6)
@@ -117,49 +100,56 @@ def syntaxError():
         
 def executeTurn(currentTurn):    
     placeOnGrid(currentTurn)
-    everythingCheck()
+    return everythingCheck()
     
 
 
-def CheckGame(x,y,z):
-    if theBoard[x] == player2Piece:
-        if theBoard[y] == player2Piece:
-            if theBoard[z] == player2Piece:
+def DidSomeoneWin(x,y,z):
+    print('DidSomeoneWin')
+    if theBoard[x] == player2Piece and theBoard[y] == player2Piece and theBoard[z] == player2Piece:
                 print('Game Over!' + player2Piece +  'won!')
-                sys.exit()
+                printBoard(theBoard)
+                return True
     if theBoard[x] == player1Piece:
         if theBoard[y] == player1Piece:
             if theBoard[z] == player1Piece:
                 print('Game Over!' + player1Piece +  'won!')
-                sys.exit()                   
+                printBoard(theBoard)
+                return True
+
+    return False        
+                
 def everythingCheck():
-    CheckGame(1,2,3)
-    CheckGame(4,5,6)
-    CheckGame(7,8,9)
-    CheckGame(1,4,7)
-    CheckGame(2,5,8)
-    CheckGame(3,6,9)
-    CheckGame(7,5,3)
-    CheckGame(9,5,1)
+    if     DidSomeoneWin(1,2,3) \
+        or DidSomeoneWin(4,5,6) \
+        or DidSomeoneWin(7,8,9) \
+        or DidSomeoneWin(1,4,7) \
+        or DidSomeoneWin(2,5,8) \
+        or DidSomeoneWin(3,6,9) \
+        or DidSomeoneWin(7,5,3) \
+        or DidSomeoneWin(9,5,1):
+        return True
+    else:
+        return False
     
 
 def allTurns():
-    executeTurn('0')
-    executeTurn('X')
-    executeTurn('0')
-    executeTurn('X')
-    executeTurn('0')
-    executeTurn('X')
-    executeTurn('0')
-    executeTurn('X')
-    executeTurn('0')
+    currentTurn = '0'
+    gameIsNotOver = True
+
+    while gameIsNotOver:
+        gameIsNotOver = not executeTurn(currentTurn)
+            
+        if currentTurn == '0':
+            currentTurn = 'X'
+        else:
+            currentTurn = '0'
 
     
 def game():
     
     allTurns()
-    while True:
-        everythingCheck()
+
     while True:
         noFunnyBusiness()
 
@@ -180,4 +170,3 @@ def FullGame():
 
 
 FullGame()
-sys.exit()
