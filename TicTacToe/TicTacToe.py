@@ -66,18 +66,47 @@ def placeOnGrid(currentPlayerPiece):
     printBoard(theBoard)
     textmove= input()
     move= int(textmove)
+
+
+    if theBoard[move] == 'X' or '0':
+        print('Sorry that is not a square on the board. Please try again')
+        print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
+        printBoard(theBoard)
+        textmove= input()
+        move= int(textmove)
+        theBoard[move]=currentPlayerPiece
+        currentPlayerPiece = 'X'
+    if move > 9:
+        print('Sorry that is not a square on the board. Please try again')
+        print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
+        printBoard(theBoard)
+        textmove= input()
+        move= int(textmove)
+        theBoard[move]=currentPlayerPiece
+        currentPlayerPiece = 'X'
+
+    if move < 1:
+        print('Sorry that is not a square on the board. Please try again')
+        print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
+        printBoard(theBoard)
+        textmove= input()
+        move= int(textmove)
+        theBoard[move]=currentPlayerPiece
+        currentPlayerPiece = 'X'
+    if move == '':
+        print('Sorry that is not a square on the board. Please try again')
+        print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
+        printBoard(theBoard)
+        textmove= input()
+        move= int(textmove)
+        theBoard[move]=currentPlayerPiece
+        currentPlayerPiece = 'X'
+
+        
     theBoard[move]=currentPlayerPiece
     currentPlayerPiece = 'X'
 
-def noFunnyBusiness():
-    isAValidMove = True
-    
-    if move > '9':
-        syntaxError()
-    if move < '1':
-        syntaxError()
-    if move == '':
-        syntaxError()
+
 def fullCheckWin():
     checkWin(7,8,9)
     checkWin(4,5,6)
@@ -105,7 +134,6 @@ def executeTurn(currentTurn):
 
 
 def DidSomeoneWin(x,y,z):
-    print('DidSomeoneWin')
     if theBoard[x] == player2Piece and theBoard[y] == player2Piece and theBoard[z] == player2Piece:
                 print('Game Over!' + player2Piece +  'won!')
                 printBoard(theBoard)
@@ -150,8 +178,6 @@ def game():
     
     allTurns()
 
-    while True:
-        noFunnyBusiness()
 
 #Ask Player1 where they want to move, Check for a valid move, Put the move into the board
 #Check for win
