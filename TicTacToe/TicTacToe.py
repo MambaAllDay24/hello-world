@@ -66,46 +66,8 @@ def placeOnGrid(currentPlayerPiece):
     printBoard(theBoard)
     textmove= input()
     move= int(textmove)
-
-
-    if theBoard[move] == 'X' or '0':
-        print('Sorry that is not a square on the board. Please try again')
-        print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
-        printBoard(theBoard)
-        textmove= input()
-        move= int(textmove)
-        theBoard[move]=currentPlayerPiece
-        currentPlayerPiece = 'X'
-    if move > 9:
-        print('Sorry that is not a square on the board. Please try again')
-        print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
-        printBoard(theBoard)
-        textmove= input()
-        move= int(textmove)
-        theBoard[move]=currentPlayerPiece
-        currentPlayerPiece = 'X'
-
-    if move < 1:
-        print('Sorry that is not a square on the board. Please try again')
-        print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
-        printBoard(theBoard)
-        textmove= input()
-        move= int(textmove)
-        theBoard[move]=currentPlayerPiece
-        currentPlayerPiece = 'X'
-    if move == '':
-        print('Sorry that is not a square on the board. Please try again')
-        print("It's your turn,  " + currentPlayerPiece + " Move to which place?")
-        printBoard(theBoard)
-        textmove= input()
-        move= int(textmove)
-        theBoard[move]=currentPlayerPiece
-        currentPlayerPiece = 'X'
-
-        
     theBoard[move]=currentPlayerPiece
-    currentPlayerPiece = 'X'
-
+    currentPlayerPiece='X'
 
 def fullCheckWin():
     checkWin(7,8,9)
