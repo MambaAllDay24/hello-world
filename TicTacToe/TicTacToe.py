@@ -79,6 +79,7 @@ def fullCheckWin():
 
 
         
+<<<<<<< Updated upstream
 def executeTurn():    
     placeOnGrid('0')
     placeOnGrid('X')
@@ -89,6 +90,28 @@ def CheckGame(x,y,z):
                     print('Game Over! X Won!')
                 elif theBoard[z] == '0':
                     print('Game Over! 0 Won!')
+=======
+def executeTurn(currentTurn):    
+    placeOnGrid(currentTurn)
+    return everythingCheck()
+    
+
+
+def DidSomeoneWin(x,y,z):
+    if theBoard[x] == player2Piece and theBoard[y] == player2Piece and theBoard[z] == player2Piece:
+                print('Game Over!' + player2Piece + ' won!')
+                printBoard(theBoard)
+                return True
+    if theBoard[x] == player1Piece:
+        if theBoard[y] == player1Piece:
+            if theBoard[z] == player1Piece:
+                print('Game Over!' + player1Piece +  ' won!')
+                printBoard(theBoard)
+                return True
+
+    return False        
+                
+>>>>>>> Stashed changes
 def everythingCheck():
     CheckGame(1,2,3)
     CheckGame(4,5,6)
